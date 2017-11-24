@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_laboral"
+            
+            android:title="OFERTA LABORAL" />
+        <item
+            android:id="@+id/nav_numerosutiles"
+
+            android:title="EMERGENCIAS" />
+        <item
+            android:id="@+id/nav_terrenos"
+
+            android:title="TERRENOS" />
+        <item
+            android:id="@+id/nav_contacto"
+
+            android:title="CONTACTOS" />
+        <item
+            android:id="@+id/nav_salir"
+
+            android:title="SALIR" />
+
+    </group>
+
+
+
+</menu>
