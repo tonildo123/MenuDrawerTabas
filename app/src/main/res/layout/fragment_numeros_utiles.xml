@@ -1,13 +1,55 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.programacion5.menudrawertabas.NumerosUtiles">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_weight="0.75"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <Button
+            android:id="@+id/buttonPolicia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/policia"
+            android:onClick="llamarPolicias"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonAmbulancia"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/ambulancia"
+            android:onClick="llamarAmbulancia"
+             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.75"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/buttonBomberos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bomberos"
+            android:onClick="llamarBomberos"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+
+</LinearLayout>
