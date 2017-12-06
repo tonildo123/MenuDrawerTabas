@@ -17,29 +17,13 @@ public class dbOfertaLaboral {
     private DataBaseApp ofertaLaboral;
 
     public dbOfertaLaboral(Activity activity) {
-
-        ofertaLaboral = new DataBaseApp(activity, "dbOfertaLaboral", null, 1);
+        ofertaLaboral = new DataBaseApp(activity, "DbOfertaLaboral", null, 1);
     }
-    public String levantar(String ofertaLaboral) {
-        SQLiteDatabase db = this.ofertaLaboral.getWritableDatabase();
-        Cursor fila = db.rawQuery("select * from ofertaLaboral" , null);
-
-        if(!fila.moveToFirst()){
-            db.close();
-            return null;
-        }else{
-
-            String contactGuia = new String (fila.getString(1));
-            db.close();
-            return contactGuia;
-        }
-
-    }
-    public void guardar(String laboralOf) {
+    public void guardar(String nombre, String laboralOf) {
         if(laboralOf != null){
             SQLiteDatabase db = ofertaLaboral.getWritableDatabase();
             ContentValues registro = new ContentValues();
-            Cursor fila = db.rawQuery("select * from ofertaLaboral", null);
+            Cursor fila = db.rawQuery("select * from "+ nombre, null);
 
 
             boolean b;
@@ -65,16 +49,31 @@ public class dbOfertaLaboral {
             String s = (fecha.getYear()+1900)+"-"+mes+"-"+dia;
             registro.put("modificacion", s);
             if(b){
-                db.update("ofertaLaboral",registro,"_id=1",null);
+                db.update(nombre,registro,"_id=1",null);
             }else{
-                db.insert("ofertaLaboral", null, registro);
+                db.insert(nombre, null, registro);
             }
             db.close();
         }
     }
-    public Date getModificacion(){
+    public String levantar(String nombre) {
         SQLiteDatabase db = ofertaLaboral.getWritableDatabase();
-        Cursor fila = db.rawQuery("select modificacion from ofertaLaboral" , null);
+        Cursor fila = db.rawQuery("select * from "+ nombre , null);
+
+        if(!fila.moveToFirst()){
+            db.close();
+            return null;
+        }else{
+
+            String contactGuia = new String (fila.getString(1));
+            db.close();
+            return contactGuia;
+        }
+
+    }
+    public Date getModificacion(String nombre){
+        SQLiteDatabase db = ofertaLaboral.getWritableDatabase();
+        Cursor fila = db.rawQuery("select modificacion from "+ nombre , null);
 
         if(!fila.moveToFirst()){
             db.close();

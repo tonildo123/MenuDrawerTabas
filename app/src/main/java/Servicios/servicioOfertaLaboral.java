@@ -6,6 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by PROGRAMACION5 on 04/12/2017.
@@ -23,7 +24,8 @@ public class servicioOfertaLaboral {
         return oferta;
     }
 
-    public String laboralOf(String url){
+    public ArrayList<String> laboralOf(String url){
+        ArrayList<String> lista = new ArrayList<>();
         try {
             doc = Jsoup.connect(url).userAgent("Mozilla").get();
             if(doc == null){
@@ -35,26 +37,16 @@ public class servicioOfertaLaboral {
             Elements element3 = doc.getElementsByTag("h1");
             Elements elements1 = select.getElementsByClass("item");
 
+            lista.add(element3.text());
 
-
-            if(url.equals(urlOfertaLaboral)){
-                s = s.concat(element3.toString());
-
-                for (Element element:elements1){
-                    s = s.concat(element.toString());
-
-
-                }
-
-
-
+            for (Element element : elements1) {
+                lista.add(element.text());
             }
-
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-        return s;
+        return lista;
     }
     public String getUrlOfertaLaboral() {
         return urlOfertaLaboral;

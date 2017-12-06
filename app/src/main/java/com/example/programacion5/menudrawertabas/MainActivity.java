@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        oferLaboral = new dbOfertaLaboral(act);
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity
 
         FragmentManager m = getSupportFragmentManager();
         m.beginTransaction().replace(R.id.contenedor, new OfertasLaboral()).commit();
-        obetenerOfertaLaboral();
+
     }
 
 
@@ -108,10 +108,18 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        oferLaboral = new dbOfertaLaboral(act);
+//        obetenerOfertaLaboral();
+    }
+
     private void obetenerOfertaLaboral() {
         Date fechaactual = new Date();
         if( oferLaboral.levantar("ofertaLaboral") == null || (fechaactual.getTime()-oferLaboral.getModificacion("ofertaLaboral").getTime()) > 604800000){
-           | oferLaboral.guardar("ofertaLaboral",servicioOfertaLaboral.getInstance().laboral(servicioOfertaLaboral.getInstance().getUrlOfertaLaboral()));
+
         }
     }
 }

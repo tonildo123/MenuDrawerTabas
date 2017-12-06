@@ -13,65 +13,73 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
 
 import Persistencia.dbOfertaLaboral;
+import Servicios.servicioOfertaLaboral;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class OfertasLaboral extends Fragment {
+    private servicioOfertaLaboral serv;
+
     private dbOfertaLaboral dbOferta;
     private String laboral;
     private TextView titulo;
     private WebView web;
+    private ArrayList<String> lista = new ArrayList<>();
+    private View v;
 
 
     String titul = " OFERTA LABORAL ";
-    public OfertasLaboral() {
-        // Required empty public constructor
-    }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v =inflater.inflate(R.layout.fragment_ofertas_laboral, container, false);;
+        v =inflater.inflate(R.layout.fragment_ofertas_laboral, container, false);;
 
         titulo = (TextView)v.findViewById(R.id.textView7);
-        dbOferta = new dbOfertaLaboral(this.getActivity());
-        laboral = dbOferta.levantar("ofertaLaboral");
-        if(laboral != null){
-            cargarVista(v);
-        }
 
         titulo.setText(titul);
-
 
         // Inflate the layout for this fragment
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//        laboral = dbOferta.levantar("ofertaLaboral");
+        dbOferta = new dbOfertaLaboral(this.getActivity());
+        obetenerOfertaLaboral();
+        cargarVista(v);
+    }
+
+
+
     private void cargarVista(View v) {
-
-        web = (WebView)v.findViewById(R.id.webGaceta);
-        WebSettings settings = web.getSettings();
-        settings.setDefaultTextEncodingName("UTF-8");
-        settings.setDefaultFontSize(14);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-            String base64 = null;
-            try {
-                base64 = Base64.encodeToString(laboral.getBytes("UTF-8"), Base64.DEFAULT);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            web.loadData(base64, "text/html; charset=UTF-8", "base64");
-        } else {
-            String header = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>";
-            web.loadData(header + laboral, "text/html; charset=UTF-8", null);
-        }
-
 
     }
 
+    private void obetenerOfertaLaboral() {
+        Date fechaactual = new Date();
+        if( dbOferta.levantar("ofertaLaboral") == null || (fechaactual.getTime()-dbOferta.getModificacion("ofertaLaboral").getTime()) > 604800000){
+            Thread hilo = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    lista = serv.getInstance().laboralOf(serv.getInstance().getUrlOfertaLaboral());
+                }
+            });
+            hilo.start();
+            try {
+                hilo.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
