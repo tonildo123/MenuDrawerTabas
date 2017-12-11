@@ -113,13 +113,8 @@ public class MainActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         oferLaboral = new dbOfertaLaboral(act);
-//        obetenerOfertaLaboral();
+
     }
 
-    private void obetenerOfertaLaboral() {
-        Date fechaactual = new Date();
-        if( oferLaboral.levantar("ofertaLaboral") == null || (fechaactual.getTime()-oferLaboral.getModificacion("ofertaLaboral").getTime()) > 604800000){
 
-        }
-    }
 }

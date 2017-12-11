@@ -42,6 +42,7 @@ public class servicioOfertaLaboral {
             for (Element element : elements1) {
                 lista.add(element.text());
             }
+            System.out.println("");
         } catch (IOException e) {
             e.printStackTrace();
             return null;
