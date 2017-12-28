@@ -39,7 +39,7 @@ private WebView shark;
         shark.loadUrl(url);
         shark.getSettings().setJavaScriptEnabled(true);
         shark.setWebViewClient(new WebViewClient());
-        progressBar = (ProgressBar)v.findViewById(R.id.progressbar2);
+        progressBar = (ProgressBar)v.findViewById(R.id.progressbar);
         shark.setWebChromeClient(new WebChromeClient()
         {
             @Override

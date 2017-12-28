@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class servicioOfertaLaboral {
     private Document doc;
-    private Element selectorDiv;
+//    private Element selectorDiv;
     private String  s="";;
 
     private String urlOfertaLaboral = "https://clasificados.lagaceta.com.ar/categoria/137/pedidos-empleos";

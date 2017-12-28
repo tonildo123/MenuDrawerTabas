@@ -1,4 +1,4 @@
-package com.example.programacion5.menudrawertabas;
+package Adaptadores;
 
 import android.app.Activity;
 
@@ -13,6 +13,8 @@ import android.widget.ArrayAdapter;
 
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.programacion5.menudrawertabas.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +61,7 @@ public class AdaptadorOfertaLaboral extends ArrayAdapter<List<List>> {
 
         // *** instanciamos a los recursos
         viewHolder.texto = (TextView) view.findViewById(R.id.parrafo);
-
-        viewHolder.texto.setTextSize(26);
-
+        viewHolder.texto.setTextSize(20);
         // importante!!! establecemos el mensaje
         viewHolder.texto.setText(lista.get(position));
 

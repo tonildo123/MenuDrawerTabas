@@ -24,11 +24,6 @@ public class Contacto extends Fragment {
     private ViewPager viewPager;
 
 
-    public Contacto() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,7 +31,7 @@ public class Contacto extends Fragment {
         View vista = inflater.inflate(R.layout.fragment_contacto, container, false);
 
         View contenedor = (View) container.getParent();
-        appBar = (AppBarLayout)contenedor.findViewById(R.id.appbar);
+        appBar = (AppBarLayout) contenedor.findViewById(R.id.appbar);
         // retorna la vista del fragmento asociado
         tabs = new TabLayout(getActivity());
         tabs.setTabTextColors(Color.parseColor("#FFFFFF"), Color.parseColor("#FFFFFF"));
@@ -44,13 +39,11 @@ public class Contacto extends Fragment {
         tabs.setSelectedTabIndicatorColor(Color.parseColor("#bbdefb"));
         // inserta el tab en el appbar
         appBar.addView(tabs);
-
         viewPager = (ViewPager) vista.findViewById(R.id.pager);
-        Contacto.ViewPagerAdapter paginaAdapter = new ViewPagerAdapter(getFragmentManager());
+        ViewPagerAdapter paginaAdapter = new ViewPagerAdapter(getFragmentManager());
         viewPager.setAdapter(paginaAdapter);
         tabs.setupWithViewPager(viewPager);
         // retornamos la vista cargada
-
         return vista;
     }
 
@@ -71,8 +64,10 @@ public class Contacto extends Fragment {
             // instanciamos los fragmentos de la clase tabs para crear los objetos
             switch (position) {
 
-                case 0: SharkDesign tdos = new SharkDesign();  return tdos;
-                case 1: SharkStudio tuno = new SharkStudio();  return tuno;
+                case 0: SharkDesign tdos = new SharkDesign();
+                    return tdos;
+                case 1: SharkStudio tuno = new SharkStudio();
+                    return tuno;
 
             }
             return null;

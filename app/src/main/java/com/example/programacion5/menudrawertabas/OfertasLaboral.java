@@ -6,13 +6,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import Adaptadores.AdaptadorOfertaLaboral;
 import Persistencia.dbOfertaLaboral;
 import Servicios.servicioOfertaLaboral;
 
@@ -33,12 +33,9 @@ public class OfertasLaboral extends Fragment {
 
     private String laboral;
     private TextView titulo;
-//    private WebView web;
 
     private View v;
-
-
-    String titul = " OFERTA LABORAL ";
+    private String titul = " OFERTA LABORAL ";
 
 
     @Override
@@ -58,7 +55,7 @@ public class OfertasLaboral extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        laboral = dbOferta.levantar("ofertaLaboral");
+
         dbOferta = new dbOfertaLaboral(this.getActivity());
 
         obetenerOfertaLaboral();
@@ -67,18 +64,12 @@ public class OfertasLaboral extends Fragment {
 
 
     private void cargarVista(View v) {
-        for(int i=0; i < lista.size(); i++){
-            dbOferta.guardar("ofertaLaboral", lista.get(i));
-        }
 
-        if(lista != null){
+
+            lista = dbOferta.levantar("ofertaLaboral");
             listView = (ListView) v.findViewById(R.id.list);
             listAdapter = new AdaptadorOfertaLaboral(this.getActivity(), lista);
             listView.setAdapter(listAdapter);
-        }
-
-
-
 
     }
 
@@ -89,7 +80,8 @@ public class OfertasLaboral extends Fragment {
             Thread hilo = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    lista = serv.getInstance().laboralOf("https://clasificados.lagaceta.com.ar/mercado-laboral");
+                    lista = serv.getInstance().laboralOf("https://clasificados.lagaceta.com.ar/categoria/137/pedidos-empleos");
+                    dbOferta.guardar(lista, "ofertaLaboral");
                 }
             });
             hilo.start();
@@ -97,8 +89,6 @@ public class OfertasLaboral extends Fragment {
                 hilo.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            }
-        }
-    }
+            }}}
 
 }

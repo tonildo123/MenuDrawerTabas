@@ -6,6 +6,13 @@
     tools:context="com.example.programacion5.menudrawertabas.NumerosUtiles">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.97"
+        android:orientation="vertical"></LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,6 +23,7 @@
             android:id="@+id/buttonPolicia"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:background="@drawable/policia"
             android:onClick="llamarPolicias"
             android:textSize="30sp" />
