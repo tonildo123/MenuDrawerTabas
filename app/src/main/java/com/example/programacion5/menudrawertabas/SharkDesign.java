@@ -56,4 +56,9 @@ public class SharkDesign extends Fragment {
         return v;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Transicion.getInstance().transicionFragments(getView(),getActivity());
+    }
 }

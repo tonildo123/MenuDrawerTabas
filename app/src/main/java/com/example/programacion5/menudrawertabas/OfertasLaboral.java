@@ -60,6 +60,7 @@ public class OfertasLaboral extends Fragment {
 
         obetenerOfertaLaboral();
         cargarVista(v);
+        Transicion.getInstance().transicionFragments(getView(),getActivity());
     }
 
 

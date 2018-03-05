@@ -71,4 +71,9 @@ public class NumerosUtiles extends Fragment {
         return vista;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        Transicion.getInstance().transicionFragments(getView(),getActivity());
+    }
 }

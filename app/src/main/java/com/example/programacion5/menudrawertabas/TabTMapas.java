@@ -26,4 +26,9 @@ public class TabTMapas extends Fragment {
         return inflater.inflate(R.layout.fragment_tab_tmapas, container, false);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity();
+    }
 }
